@@ -1,0 +1,27 @@
+### Submit a card rating (collector-api)
+POST http://localhost:8081/api/v1/ratings
+Content-Type: application/json
+
+{
+  "cardId": "CHARIZARD_BASE_SET",
+  "userId": "user-01",
+  "score": 5,
+  "tags": ["FIRE", "HOLO", "VINTAGE"],
+  "experience": "Centerpiece card for a vintage fire collection."
+}
+
+### Submit another quick rating for the same card (used in debugging exercise)
+POST http://localhost:8081/api/v1/ratings
+Content-Type: application/json
+
+{
+  "cardId": "CHARIZARD_BASE_SET",
+  "userId": "user-02",
+  "score": 2,
+  "tags": ["FIRE", "VINTAGE"],
+  "experience": "The card is iconic, but this copy had rough edges."
+}
+
+### Get tag-based suggestions (advisor-api)
+GET http://localhost:8082/api/v1/suggestions?tags=FIRE&tags=HOLO&tags=VINTAGE
+Accept: application/json

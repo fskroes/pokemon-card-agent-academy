@@ -1,0 +1,4 @@
+interface:
+  display_name: "PR Creator"
+  short_description: "Create PRs safely from a clean branch."
+  default_prompt: "Use $pr-creator to create a pull request for the current branch."

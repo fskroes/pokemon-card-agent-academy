@@ -1,0 +1,56 @@
+{
+  "info": {
+    "name": "Pokemon Card Agent Academy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Requests for collector-api and advisor-api baseline flows."
+  },
+  "item": [
+    {
+      "name": "Submit Card Rating",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8081/api/v1/ratings",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["api", "v1", "ratings"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cardId\": \"MEWTWO_PROMO\",\n  \"userId\": \"user-08\",\n  \"score\": 4,\n  \"tags\": [\"PSYCHIC\", \"PROMO\"],\n  \"experience\": \"Clean promo card with strong binder appeal.\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get Card Suggestions",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/v1/suggestions?tags=PSYCHIC&tags=PROMO",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["api", "v1", "suggestions"],
+          "query": [
+            {
+              "key": "tags",
+              "value": "PSYCHIC"
+            },
+            {
+              "key": "tags",
+              "value": "PROMO"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

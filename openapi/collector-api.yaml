@@ -1,0 +1,106 @@
+openapi: 3.0.3
+info:
+  title: collector-api
+  version: 1.0.0
+  description: API for submitting Pokemon card ratings that are published as Kafka events.
+servers:
+  - url: http://localhost:8081
+paths:
+  /api/v1/ratings:
+    post:
+      summary: Submit a card rating
+      operationId: submitRating
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatingSubmissionRequest'
+      responses:
+        '202':
+          description: Rating accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingAcceptedResponse'
+        '400':
+          description: Validation error
+components:
+  schemas:
+    RatingSubmissionRequest:
+      type: object
+      required: [cardId, userId, score, tags, experience]
+      properties:
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        userId:
+          type: string
+          minLength: 1
+        score:
+          type: integer
+          minimum: 1
+          maximum: 5
+        tags:
+          type: array
+          minItems: 1
+          maxItems: 3
+          items:
+            $ref: '#/components/schemas/CardTag'
+        experience:
+          type: string
+          minLength: 1
+          maxLength: 2000
+    RatingAcceptedResponse:
+      type: object
+      required: [eventId, acceptedAt, message]
+      properties:
+        eventId:
+          type: string
+          format: uuid
+        acceptedAt:
+          type: string
+          format: date-time
+        message:
+          type: string
+    CardId:
+      type: string
+      enum:
+        - CHARIZARD_BASE_SET
+        - PIKACHU_JUNGLE
+        - BLASTOISE_BASE_SET
+        - VENUSAUR_BASE_SET
+        - MEWTWO_PROMO
+        - LUGIA_NEO_GENESIS
+        - UMBREON_MOONBREON
+        - SNORLAX_JUNGLE
+        - GENGAR_FOSSIL
+        - EEVEE_PROMO
+        - DRAGONITE_FOSSIL
+        - GYARADOS_BASE_SET
+        - ALAKAZAM_BASE_SET
+        - RAICHU_BASE_SET
+        - LAPRAS_FOSSIL
+        - MACHAMP_FIRST_EDITION
+        - ZAPDOS_FOSSIL
+        - ARCANINE_BASE_SET
+        - MEW_BLACK_STAR
+        - TYRANITAR_NEO_DISCOVERY
+    CardTag:
+      type: string
+      enum:
+        - FIRE
+        - WATER
+        - GRASS
+        - ELECTRIC
+        - PSYCHIC
+        - FIGHTING
+        - DARK
+        - DRAGON
+        - HOLO
+        - VINTAGE
+        - STARTER
+        - LEGENDARY
+        - PROMO
+        - PLAYABLE
+        - ART_RARE
+        - COLLECTION_CENTERPIECE
