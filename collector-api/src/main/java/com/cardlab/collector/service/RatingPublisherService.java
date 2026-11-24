@@ -34,7 +34,6 @@ public class RatingPublisherService {
                 Instant.now()
         );
 
-        // Intentionally flawed for Exercise 01: no card-based message key is used.
         kafkaTemplate.send(ratingsTopic, event);
         return event.eventId();
     }
