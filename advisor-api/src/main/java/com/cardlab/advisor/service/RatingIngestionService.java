@@ -64,7 +64,6 @@ public class RatingIngestionService {
         stats.setRatingCount((int) ratingCount);
         stats.setAverageScore(averageScore);
 
-        // Intentionally susceptible to out-of-order events for Exercise 01.
         stats.setLastReviewSubmittedAt(incomingEvent.submittedAt());
         stats.setLastReviewUserId(incomingEvent.userId());
         stats.setLastReviewScore(incomingEvent.score());
